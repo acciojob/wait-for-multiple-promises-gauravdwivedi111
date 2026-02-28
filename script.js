@@ -1,8 +1,7 @@
-//your JS code here. If required.
 const output = document.getElementById("output");
 
 output.innerHTML = `
-    <tr>
+    <tr id="loading">
         <td colspan="2" class="text-center">Loading...</td>
     </tr>
 `;
@@ -28,7 +27,10 @@ Promise.all([promise1, promise2, promise3])
         const endTime = performance.now();
         const totalTime = (endTime - startTime) / 1000;
 
-        output.innerHTML = "";
+        const loadingRow = document.getElementById("loading");
+        if (loadingRow) {
+            loadingRow.remove();
+        }
 
         values.forEach((time, index) => {
             const row = document.createElement("tr");
@@ -44,8 +46,8 @@ Promise.all([promise1, promise2, promise3])
         const totalRow = document.createElement("tr");
 
         totalRow.innerHTML = `
-            <td><strong>Total</strong></td>
-            <td><strong>${totalTime.toFixed(3)}</strong></td>
+            <td>Total</td>
+            <td>${totalTime.toFixed(3)}</td>
         `;
 
         output.appendChild(totalRow);
